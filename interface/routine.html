@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>App Usuario – FitGame</title>
+</head>
+
+<body>
+	<header>
+		<a href="fitgame.html">
+			<div class="logo">⚡FitGame</div>
+		</a>
+		<button class="nav-toggle" id="navToggle" aria-label="Abrir menú">&#9776;</button>
+		<nav>
+		<ul>
+			<li><a href="login.html" id="loginLink">Iniciar Sesión</a></li>
+			<li><a href="profile.html" id="profileLink" style="display:none">Perfil</a></li>
+			<li><a href="routine.html">Rutina</a></li>
+			<li><a href="social.html">Red Social</a></li>
+		</ul>
+		</nav>
+	</header>
+
+<main id="user-app" class="dashboard-cards">
+	<!-- Dashboard -->
+	<section id="dashboard" class="hidden">
+		<div id="currentRoutineCard">
+		<div id="routineHeader" class="card routine-header">
+			<h3 class="routine-title"></h3>
+			<div class="connection-indicator">
+			<span class="dot"></span>
+			<span class="conn-text">Conectado</span>
+			</div>
+		</div>
+		<div id="exerciseList"></div>
+		<button id="btnFinish" class="btn danger">Terminar rutina</button>
+		</div>
+		<!-- Agregar el botón dentro del body -->
+		<button id="voiceButton">
+		Iniciar Reconocimiento de Voz
+		</button>
+	</section>
+
+	<!-- Selección de Rutina -->
+	<section id="routine-select" class="hidden">
+		<h2>Selecciona tu rutina</h2>
+		<div class="filter-bar">
+		<select id="routineFilter">
+			<option value="">Todos los grupos</option>
+			<!-- tipos de rutinas -->
+		</select>
+		</div>
+		<div id="routineCards" class="grid grid-3">
+		<!-- cards dinámicas -->
+		</div>
+	</section>
+
+	<!-- Selección de pantalla -->
+	<section id="screen-connect" class="hidden">
+		<label for="screenIdInput">ID de pantalla:</label>
+		<input type="text" id="screenIdInput" placeholder="Introduce ID de pantalla">
+		<button id="connectScreenBtn" class="btn secondary">Conectar</button>
+	</section>
+</main>
+
+<footer>
+	<p>&copy; 2025 ⚡FitGame. Todos los derechos reservados.</p>
+</footer>
+
+<template id="exercise-template">
+	<div class="card exercise-card">
+		<div>
+		<h4 class="exercise-title"></h4>
+		<p class="sets"></p>
+		<p class="reps"></p>
+		</div>
+		<button class="btn hidden">Completado</button>
+	</div>
+</template>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="module" src="/public/mobile/routine.js"></script>
+<script src="/public/sessionElements.js"></script>
+</body>
+</html>

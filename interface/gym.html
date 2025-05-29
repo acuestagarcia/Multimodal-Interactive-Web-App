@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pantalla Gym – ⚡FitGame</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header>
+        <div class="logo">⚡FitGame</div>
+    </header>
+<main id="gym-screen">
+	<h2 id="greeting" class="center"></h2>
+	<h2 id="currentRoutineName" class="center"></h2>
+
+	<!-- Controles de vídeo y ejercicio -->
+	<section class="video-zone">
+		<!-- Zona de detección (cámara o archivo) -->
+		<div id="detectorContainer" class="feed-container">
+			<video id="video" class="feed-video" muted playsinline></video>
+			<canvas id="canvas" class="feed-canvas"></canvas>
+		</div>
+		<!-- Vídeo de demostración de ejercicio -->
+	</section>
+
+	<!-- Controles de sesión y voz -->
+	<div class="sidebar">
+		<div id="currentExercise" class="rep-count">Actual: - </div>
+		<div id="nextExercise" class="rep-count"> Próximo: – </div>
+		<div id="repCount" class="rep-count"> Reps 0/0 • Set 0/0</div>
+		<div id="setTimerDisplay" class="rep-count">00:00</div>
+		<div id="restTimerDisplay" class="rep-count">00:00</div>
+	</div>
+
+</main>
+
+<footer>
+  	<p>&copy; 2025 ⚡FitGame. Todos los derechos reservados.</p>
+</footer>
+<script src="/socket.io/socket.io.js"></script>
+<script type="module" src="/public/gym/gym.js"></script>
+<script src="/public/sessionElements.js"></script>
+</body>
+</html>

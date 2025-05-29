@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<title>App Usuario – FitGame</title>
+</head>
+
+<body>
+	<header>
+        <a href="fitgame.html">
+            <div class="logo">⚡FitGame</div>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">&#9776;</button>
+        <nav>
+          <ul>
+            <li><a href="login.html" id="loginLink">Iniciar Sesión</a></li>
+            <li><a href="profile.html" id="profileLink" style="display:none">Perfil</a></li>
+            <li><a href="routine.html">Rutina</a></li>
+            <li><a href="social.html">Red Social</a></li>
+          </ul>
+        </nav>
+</header>
+
+<main id="user-app" class="dashboard-cards">
+	<!-- Red Social -->
+	<div class="grid grid-2">
+		<div class="card">
+		<h3>Amigos</h3>
+		<div id="friendList" class="friend-list"></div>
+		<div class="friend-buttons">
+			<button id="btnAddFriend" class="btn secondary">Añadir amigo</button>
+			<button id="btnDeleteFriend" class="btn secondary">Eliminar amigo</button>
+		</div>
+		</div>
+
+		<!-- Marcador -->
+		<div class="card">
+		<h3>Marcador de Ejercicios</h3>
+			<div id="scoreboard" class="scoreboard-list">
+				<!-- Las puntuaciones se cargarán aquí dinámicamente -->
+			</div>
+		</div>
+
+	</div>
+</main>
+
+<footer>
+	<p>&copy; 2025 ⚡FitGame. Todos los derechos reservados.</p>
+</footer>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/public/mobile/social.js"></script>
+<script src="/public/sessionElements.js"></script>
+</body>
+</html>

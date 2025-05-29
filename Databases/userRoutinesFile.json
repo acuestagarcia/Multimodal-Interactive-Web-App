@@ -1,0 +1,67 @@
+{
+  "alex": {
+    "name": "Calistenia Básica",
+    "exercises": [
+      {
+        "name": "Flexiones",
+        "sets": 2,
+        "reps": 3
+      },
+      {
+        "name": "Dominadas",
+        "sets": 2,
+        "reps": 2
+      },
+      {
+        "name": "Dips",
+        "sets": 2,
+        "reps": 5
+      }
+    ],
+    "timerSet": 60,
+    "timerRest": 30,
+    "numberExercisesCompleted": 3
+  },
+  "Liang": {
+    "name": "Calistenia Básica",
+    "exercises": [
+      {
+        "name": "Flexiones",
+        "sets": 2,
+        "reps": 3
+      },
+      {
+        "name": "Dominadas",
+        "sets": 2,
+        "reps": 2
+      },
+      {
+        "name": "Dips",
+        "sets": 2,
+        "reps": 5
+      }
+    ],
+    "numberExercisesCompleted": 1
+  },
+  "Esteban": {
+    "name": "Rutina Pierna Intermedia",
+    "exercises": [
+      {
+        "name": "Sentadilla búlgara",
+        "sets": 3,
+        "reps": 10
+      },
+      {
+        "name": "Peso muerto rumano",
+        "sets": 3,
+        "reps": 10
+      },
+      {
+        "name": "Elevación de talones",
+        "sets": 4,
+        "reps": 15
+      }
+    ],
+    "numberExercisesCompleted": 0
+  }
+}

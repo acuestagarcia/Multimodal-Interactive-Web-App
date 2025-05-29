@@ -1,0 +1,46 @@
+<!-- src/interface/login.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<title>Login – ⚡FitGame</title>
+	<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<header>
+        <a href="fitgame.html">
+            <div class="logo">⚡FitGame</div>
+        </a>
+	</header>
+
+	<main class="centered-container">
+		<section id="login-panel">
+		<form id="loginForm" class="login-form">
+			<h2>Iniciar sesión</h2>
+			<input name="user"     placeholder="Usuario"     type="text"     required>
+			<input name="password" placeholder="Contraseña" type="password" required>
+			<button type="submit">Entrar</button>
+			<a href="#" id="register_btn">Registrarse</a>
+		</form>
+		</section>
+
+		<section id="register-panel" class="hidden">
+		<form id="registerForm" class="login-form">
+			<h2>Registrarse</h2>
+			<input name="user"     placeholder="Usuario"     type="text"     required>
+			<input name="password" placeholder="Contraseña" type="password" required>
+			<button type="submit">Crear cuenta</button>
+			<a href="#" id="login_btn">Volver a login</a>
+		</form>
+		</section>
+	</main>
+
+	<footer>
+        <p>&copy; 2025 ⚡FitGame. Todos los derechos reservados.</p>
+    </footer>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="/public/mobile/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,130 @@
+{
+	"Pierna": [
+		{
+		"name": "Rutina Pierna Básica",
+		"exercises": [
+			{ "name": "Sentadillas", "sets": 3, "reps": 12 },
+			{ "name": "Prensa de piernas", "sets": 3, "reps": 10 },
+			{ "name": "Estocadas", "sets": 3, "reps": 12 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Rutina Pierna Intermedia",
+		"exercises": [
+			{ "name": "Sentadilla búlgara", "sets": 3, "reps": 10 },
+			{ "name": "Peso muerto rumano", "sets": 3, "reps": 10 },
+			{ "name": "Elevación de talones", "sets": 4, "reps": 15 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Rutina Pierna Avanzada",
+		"exercises": [
+			{ "name": "Sentadilla frontal", "sets": 4, "reps": 8 },
+			{ "name": "Zancadas con barra", "sets": 3, "reps": 10 },
+			{ "name": "Buenos días", "sets": 3, "reps": 10 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		}
+	],
+	"Push": [
+		{
+		"name": "Rutina Push Básica",
+		"exercises": [
+			{ "name": "Press de banca", "sets": 3, "reps": 10 },
+			{ "name": "Press militar", "sets": 3, "reps": 10 },
+			{ "name": "Fondos", "sets": 3, "reps": 10 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Rutina Push Intermedia",
+		"exercises": [
+			{ "name": "Press inclinado con mancuernas", "sets": 3, "reps": 12 },
+			{ "name": "Elevaciones laterales", "sets": 4, "reps": 12 },
+			{ "name": "Press francés", "sets": 3, "reps": 10 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Rutina Push Avanzada",
+		"exercises": [
+			{ "name": "Press de banca con pausa", "sets": 4, "reps": 6 },
+			{ "name": "Press militar con barra", "sets": 4, "reps": 8 },
+			{ "name": "Fondos con peso", "sets": 4, "reps": 8 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		}
+	],
+	"Pull": [
+		{
+		"name": "Rutina Pull Básica",
+		"exercises": [
+			{ "name": "Dominadas", "sets": 3, "reps": 8 },
+			{ "name": "Remo con barra", "sets": 3, "reps": 10 },
+			{ "name": "Curl de bíceps", "sets": 3, "reps": 12 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Rutina Pull Intermedia",
+		"exercises": [
+			{ "name": "Jalón al pecho", "sets": 3, "reps": 12 },
+			{ "name": "Face pull", "sets": 4, "reps": 15 },
+			{ "name": "Curl martillo", "sets": 3, "reps": 12 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Rutina Pull Avanzada",
+		"exercises": [
+			{ "name": "Remo con barra T", "sets": 4, "reps": 8 },
+			{ "name": "Dominadas lastradas", "sets": 4, "reps": 6 },
+			{ "name": "Curl concentrado", "sets": 3, "reps": 10 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		}
+	],
+	"Calistenia": [
+		{
+		"name": "Calistenia Básica",
+		"exercises": [
+			{ "name": "Flexiones", "sets": 2, "reps": 3 },
+			{ "name": "Dominadas", "sets": 2, "reps": 2 },
+			{ "name": "Dips", "sets": 2, "reps": 5 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Calistenia Intermedia",
+		"exercises": [
+			{ "name": "Flexiones", "sets": 4, "reps": 8 },
+			{ "name": "Dominadas", "sets": 4, "reps": 6 },
+			{ "name": "Dips", "sets": 4, "reps": 10 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		},
+		{
+		"name": "Calistenia Avanzada",
+		"exercises": [
+			{ "name": "Flexiones", "sets": 6, "reps": 8 },
+			{ "name": "Dominadas", "sets": 6, "reps": 6 },
+			{ "name": "Dips", "sets": 6, "reps": 10 }
+			],
+			"timerSet": 60,
+			"timerRest": 30
+		}
+	]
+}

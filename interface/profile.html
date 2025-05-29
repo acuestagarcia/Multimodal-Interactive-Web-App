@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Perfil – ⚡FitGame</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <header>
+        <a href="fitgame.html"><div class="logo">⚡FitGame</div></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">&#9776;</button>
+        <nav>
+        <ul>
+            <li><a href="login.html" id="loginLink">Iniciar Sesión</a></li>
+            <li><a href="profile.html" id="profileLink" style="display:none">Perfil</a></li>
+            <li><a href="routine.html">Rutina</a></li>
+            <li><a href="social.html">Red Social</a></li>
+        </ul>
+        </nav>
+    </header>
+
+    <main class="profile-container">
+        <div class="profile-card">
+            <!-- Avatar; reemplaza src por la URL real o un placeholder -->
+            <img src="avatar-default.svg" alt="Avatar" class="profile-avatar" />
+
+            <!-- Saludo -->
+            <h2 id="greeting">Bienvenido, Usuario</h2>
+
+            <!-- Botón de cierre de sesión -->
+            <button id="logoutBtn" class="btn danger">Cerrar sesión</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 ⚡FitGame. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/sessionElements.js"></script>
+</body>
+</html>

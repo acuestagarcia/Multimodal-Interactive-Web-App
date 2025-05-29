@@ -1,0 +1,975 @@
+/* ============================== ROOT VARIABLES & GLOBAL STYLES ============================== */
+:root {
+    --primary:#2795ff;
+    --primary-dark:#0e5ea8;
+    --secondary:#ffce54;
+    --bg:#f5f7fa;
+    --card-bg:#ffffff;
+    --text:#2e3e4e;
+    --success:#4caf50;
+    --danger:#e53935;
+    --radius:16px;
+    --shadow:0 4px 12px rgba(0,0,0,.1);
+    --transition:.25s ease-in-out;
+    font-size:16px;
+    font-family:'Trebuchet MS', Arial, sans-serif;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+
+body {
+    background:var(--bg);
+    /* color:var(--text); */ /* Commented out in original */
+    line-height:1.5;
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #f4f7fa;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;   /* evitar desplazamiento lateral / área en blanco */
+}
+
+main {
+    flex: 1;
+    padding: 2rem;
+}
+
+header{
+    background: #4a90e2;
+    color: white;
+    padding:1rem 2rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    box-shadow:var(--shadow);
+    font-family: 'Helvetica Neue';
+    font-weight: 900;
+    text-align: center;
+}
+
+header > a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo{font-size:1.5rem;font-weight:bold;}
+
+nav {
+    background-color: #4a90e2;
+    padding: 10px 20px;
+    position: relative;     /* hacer que el desplegable se posicione desde la cabecera */
+}
+
+nav ul{display:flex;gap:1rem;list-style:none;}
+nav a{color:#fff;text-decoration:none;position:relative;}
+nav a::after{content:'';position:absolute;left:0;bottom:-4px;height:2px;width:0;background:var(--secondary);transition:width var(--transition);}
+nav a:hover::after{width:100%;}
+
+footer {
+    background: #fff;
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.9rem;
+    box-shadow: 0 -1px 4px rgba(0,0,0,0.1);
+}
+
+/* ============================== UTILITY CLASSES ============================== */
+.card{
+    background:var(--card-bg);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:1.25rem;
+    transition:transform var(--transition), box-shadow var(--transition);
+}
+.card h3 {
+    margin-bottom: 0.75rem;
+}
+.card:hover{transform:translateY(-4px);box-shadow:0 6px 16px rgba(0,0,0,.15);}
+
+.btn{
+    display:inline-block;
+    display:flex;                 /* ← antes inline‑block         */
+    align-items:center;           /* centra verticalmente         */
+    justify-content:center;       /* centra horizontalmente       */
+    background:var(--primary);
+    color:#fff;
+    padding:.5rem 1rem;
+    border:none;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:background var(--transition);
+    text-decoration:none;
+    font-weight:600;
+    font-family:'Trebuchet MS', Arial, sans-serif; /* obliga la misma fuente en <a> y <button> */
+    font-size:1rem;               /* 1 rem = 16 px (igual para todos) */
+    line-height:1.2;
+    text-align:center;            /* respaldo si display cambia   */
+}
+.btn:hover{background:var(--primary-dark);}
+.btn.secondary{background:var(--secondary);color:#000;}
+.btn.secondary:hover {
+    background: #f1bd36;
+}
+.btn.danger{background:var(--danger);}
+.btn.danger:hover {
+    background: #ae0c0c;
+}
+
+.grid{display:grid;gap:1.5rem;}
+/* Grids responsivos (kept with base class) */
+@media(min-width:768px){
+    .grid-2{grid-template-columns:repeat(2,1fr);}
+    .grid-3{grid-template-columns:repeat(3,1fr);}
+}
+
+.progress-bar{
+    width:100%;
+    height:16px;
+    background: #ddd;
+    border-radius: 8px;
+    overflow:hidden;
+    margin-top:.5rem;
+}
+.progress-bar div{
+    height:100%;
+    background: var(--primary-dark);
+    width: 60%; /* Default value, likely updated by JS */
+    transition: width var(--transition);
+}
+
+.badge{
+    padding:.25rem .5rem;
+    border-radius:var(--radius);
+    color:#fff;
+    font-size:.75rem;
+}
+.badge.connected{background:var(--success);}
+.badge.disconnected{background:var(--danger);}
+
+.btn-group{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:.75rem;
+    margin-top:1rem;
+    margin-bottom:2rem;    /* añade espacio bajo el grupo de botones */
+}
+.btn-group .btn{
+    width:100%;          /* rellena su celda de grid */
+}
+
+.hidden {
+    display: none !important;
+}
+
+.center{text-align:center;}
+
+.toast{
+    position:fixed;
+    bottom:1rem;
+    right:1rem;
+    background:var(--primary);
+    color:#fff;
+    padding:.75rem 1rem;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    opacity:0;
+    animation:fadeInOut 4s forwards;
+}
+
+/* Cuerpo bloqueado cuando el menú móvil está abierto */
+.menu-open{
+    overflow:hidden;
+}
+
+/* ============================== LAYOUT COMPONENTS ============================== */
+
+/* ===== Hero Section (index.html) ===== */
+.hero {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 1rem;
+    color: white;
+    position: relative;
+}
+
+.hero-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;               /* <-- ponerlo a 0 en lugar de -1 */
+}
+
+/* La capa oscura por encima del vídeo: */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1;               /* <-- subirla para que quede sobre el vídeo */
+}
+
+/* Asegúrate de que tu contenido está por encima de la capa oscura: */
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+.hero h2 {
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+.hero p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+/* ===== Botón de hamburguesa responsivo ===== */
+.nav-toggle{
+    display:none;          /* oculto en escritorio */
+    background:none;
+    border:none;
+    font-size:1.75rem;     /* tamaño de ☰ */
+    color:#fff;
+    cursor:pointer;
+    margin-left:auto;     /* empujarlo hacia la derecha */
+    order:3;              /* último elemento en la fila flex */
+}
+
+/* ============================== PAGE/FEATURE SPECIFIC STYLES ============================== */
+
+/* ===== Profile Page ===== */
+.profile-container {
+    padding: 2rem 1rem;
+    display: flex;
+    justify-content: center;
+}
+.profile-card {
+    background: var(--card-bg);
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    padding: 2rem;
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+}
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+    border: 4px solid var(--primary);
+}
+.profile-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 1.5rem 0;
+}
+.profile-stats div {
+    flex: 1;
+}
+.profile-stats div:not(:last-child) {
+    border-right: 1px solid #eee;
+}
+.profile-stats strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+/* ===== Login/Register Forms ===== */
+.login-form, .admin-login-form{
+    max-width:400px;
+    margin:2rem auto;
+    display:flex;
+    flex-direction:column;
+    gap:1rem;
+}
+input[type="text"],input[type="password"],select{
+    padding:.75rem 1rem;
+    border:1px solid #ccc;
+    border-radius:var(--radius);
+    font-size:1rem;
+    width:100%;
+    display:block;
+}
+/* Boton de registro */
+#registerForm button[type="submit"] {
+    background-color: #4CAF50; /* Verde suave */
+    color: white;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+#registerForm button[type="submit"]:hover {
+    background-color: #45a049; /* Verde un poco más oscuro */
+}
+/* Boton de login */
+#loginForm button[type="submit"] {
+    background-color: #4CAF50; /* Verde suave */
+    color: white;
+    padding: 12px 20px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+#loginForm button[type="submit"]:hover {
+    background-color: #45a049; /* Verde un poco más oscuro */
+}
+
+/* ===== Dashboard ===== */
+.dashboard-cards{
+    display:grid;
+    gap:1rem;
+}
+.dashboard-cards .card .progress-bar{
+    margin-bottom:1rem;        /* espacio bajo la barra */
+}
+.dashboard-cards .card .btn{
+    margin-top:0;              /* por si hereda márgenes */
+}
+/* gráfica placeholder */
+.chart-placeholder{
+    width:100%;
+    height:240px;
+    background:linear-gradient(135deg,#2795ff22 25%,transparent 25%,transparent 50%,#2795ff22 50%,#2795ff22 75%,transparent 75%,transparent);
+    background-size:40px 40px;
+}
+
+/* ===== Gym Screen =====*/
+#gym-screen .exercise-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+}
+/* Vídeo y canvas: ocupan todo el ancho posible hasta un máximo */
+#gym-screen video,
+#gym-screen .exercise-animation {
+    width: 100%;
+    max-width: 780px;
+    height: auto;
+    background: #000;
+    border-radius: var(--radius);
+}
+#gym-screen canvas{
+    width: 100%;
+    max-width: 780px;
+    height: auto;
+    background: #f5f7fa;
+    border-radius: var(--radius);
+}
+.timer { /* Used in Gym and Routine Header */
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: bold;
+    color: var(--primary);
+    margin: 0;
+}
+.connection-indicator{ /* Used in Gym and Routine Header */
+    display:flex;align-items:center;gap:.5rem;
+}
+.connection-indicator .dot{
+    width:10px;height:10px;border-radius:50%;
+    background:var(--success);
+    animation: pulse 2s infinite;
+}
+/* Contenedor de status + sidebar juntos en flex */
+.status-container,
+.sidebar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+}
+.status-container .connection-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.status-container .connection-indicator span {
+    font-size: 0.875rem;
+    color: var(--text);
+}
+.sidebar{
+    background:var(--card-bg);
+    padding:1rem;
+    border-top:4px solid var(--primary);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.sidebar .next-exercise{font-weight:bold;}
+.controls{
+    display:flex;gap:.5rem;
+}
+.controls button{
+    background:var(--secondary);
+    border:none;
+    padding:.5rem 1rem;
+    border-radius:var(--radius);
+    cursor:pointer;
+    font-weight:bold;
+}
+.controls button:hover{background:#ffd76b;}
+/* Contador de repeticiones */
+.rep-count {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+}
+/* Temporizador Component (within Gym/Routine context) */
+.timer-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin: 1rem 0;
+}
+.timer-section label {
+    flex-basis: 100%;
+    font-weight: bold;
+}
+.timer-section button {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    text-align: center;
+    line-height: 1;
+    border: none;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.timer-section input[type=number] {
+    width: 4rem;
+    text-align: center;
+}
+.timer-display {
+    font-size: 1.4rem;
+    font-weight: bold;
+    flex-basis: 100%;
+    text-align: center;
+    margin-top: .5rem;
+}
+/* Estilo para <input type="file"> en la detección */
+.detection-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+/* Botón nativo en WebKit (Chrome, Edge…) */
+.detection-controls input[type="file"]::-webkit-file-upload-button {
+    background: var(--secondary);
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+.detection-controls input[type="file"]::-webkit-file-upload-button:hover {
+    background: var(--primary);
+    color: #fff;
+}
+/* Botón nativo en Gecko (Firefox) */
+.detection-controls input[type="file"]::-moz-file-upload-button { /* Added for Firefox */
+    background: var(--secondary);
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
+    border-radius: var(--radius);
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background var(--transition), color var(--transition);
+}
+.detection-controls input[type="file"]::-moz-file-upload-button:hover { /* Added for Firefox */
+    background: var(--primary);
+    color: #fff;
+}
+/* Ajustes generales al input para que no se vea tan pequeño */
+.detection-controls input[type="file"] {
+    font-size: 1rem;
+    color: var(--text);
+    /* si quieres que toda la caja sea clicable y no solo el botón: */
+    /* display: block; width: 100%; */
+}
+
+/* ===== Routines ===== */
+.filter-bar{
+    display:flex;
+    gap:.5rem;
+    margin:1rem 0;
+    flex-wrap:wrap;
+}
+.routine-card{
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    cursor: pointer;
+}
+/* Rutina actual */
+#currentRoutineCard {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+#currentRoutineCard > * {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1rem;
+    text-align: center;
+}
+/* Ajuste de la barra de progreso dentro del grid */
+#currentRoutineCard > .progress-bar {
+    grid-column: 1 / -1;
+    background: #e0e0e0;
+    border-radius: 6px;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 0 1rem;
+}
+/* Título de la rutina como fila completa */
+#currentRoutineCard > h3 {
+    grid-column: 1 / -1;
+    margin: 0 0 0.5rem;
+    font-size: 1.25rem;
+    line-height: 1.2;
+}
+/* Encabezado de rutina simple usando card */
+.routine-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}
+.routine-header .timer {
+    grid-column: 1;
+    justify-self: start;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+.routine-header .routine-title {
+    grid-column: 2;
+    justify-self: center;
+    margin: 0;
+    padding: 0;
+    font-size: 1.25rem;
+    line-height: 1;
+    text-align: center;
+}
+.routine-header .connection-indicator {
+    grid-column: 3;
+    justify-self: end;
+    font-size: 0.875rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+/* Barra de progreso en la base del card */
+.routine-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: var(--primary-dark);
+    width: var(--progress, 0%); /* Controlled by JS */
+    border-radius: 2px;
+    transition: width var(--transition);
+}
+/* Lista de ejercicios */
+.exercise-list {
+    margin-top: .5rem;
+    padding: .5rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+}
+.exercise-list div {
+    padding: .25rem 0;
+    border-bottom: 1px solid #eee;
+}
+.exercise-list div:last-child {
+    border-bottom: none;
+}
+/* Tarjeta de ejercicio individual */
+.exercise-card {
+    display: flex;
+    align-items: center; /* centrado vertical del contenido */
+    justify-content: space-between;
+    margin-bottom: 1rem; /* Añadir espaciado entre ejercicios individuales */
+}
+.exercise-card .btn {
+    font-size: 0.8rem;
+    padding: 4px 8px;
+}
+/* Contenedor izquierdo (título, series, reps) */
+.exercise-card > div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* alinear a la izquierda título, series, repeticiones */
+    justify-content: center; /* centrar verticalmente dentro de la tarjeta */
+}
+/* Texto dentro de la tarjeta de ejercicio */
+.exercise-card .exercise-title,
+.exercise-card .sets,
+.exercise-card .reps {
+    margin: 0;
+    text-align: left;
+}
+/* Eliminar el estilo del contenedor de la lista de ejercicios dentro de currentRoutineCard */
+#currentRoutineCard > #exerciseList {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+}
+
+/* ===== Friends ===== */
+.friend-list{
+    display:flex;
+    flex-direction:column;
+    gap:0.5rem;
+}
+.friend {
+    background: #f9fafb;
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    font-weight: 500;
+    color: #333;
+    /* Added display flex for alignment if needed */
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+}
+.friend .btn{
+    padding:.25rem .75rem;
+    font-size:.875rem;
+}
+.friend:hover {
+    background-color: #f0f4f8;
+    transform: translateY(-2px);
+}
+/* Centrar botones de acción de amigos */
+.friend-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+/* ===== Scoreboard ===== */
+.scoreboard-list .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #f9fafb;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 0.75rem;
+}
+.scoreboard-list .card .friend { /* Reusing .friend class name here, ensure no conflicts */
+    margin: 0;
+    font-weight: 600;
+    color: var(--text);
+    /* Resetting friend specific styles if needed */
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    transition: none;
+}
+.scoreboard-list .card .friend:hover {
+    background: none;
+    transform: none;
+}
+.scoreboard-list .card .score {
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+/* ===== Admin Panel =====*/
+.admin-grid{
+    display:grid;
+    gap:2rem;              /* separa verticalmente los menús/cards */
+}
+.table{
+    width:100%;
+    border-collapse:collapse;
+}
+.table th,.table td{
+    padding:.75rem;
+    border-bottom:1px solid #ddd;
+    text-align:left;
+}
+
+/* ===== Screen Connect ===== */
+#screen-connect {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 1rem 0;
+}
+#screen-connect label {
+    font-weight: bold;
+    color: var(--text);
+}
+#screenIdInput {
+    padding: 0.75rem 1rem;
+    width: 100%;
+    max-width: 250px;
+    border: 1px solid #ccc;
+    border-radius: var(--radius);
+    font-size: 1rem;
+}
+#screenIdInput:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(39, 149, 255, 0.2);
+}
+
+/* ============================== SPECIFIC ELEMENT STYLES ============================== */
+#logoutBtn {
+    display: inline-flex; /* Was inline-flex, ensure .btn styles don't fully override if needed */
+    margin: 1rem auto 0;
+}
+
+/* Posicionamiento del botón de voz movido de inline a CSS */
+#voiceButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    background-color: #007bff; /* Using direct color, consider var(--primary) */
+    color: #fff;
+    border: none;
+    border-radius: 5px; /* Consider var(--radius) */
+    cursor: pointer;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+/* Centrar y redimensionar el botón 'Terminar rutina' */
+#btnFinish {
+    width: auto;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+    display: block; /* Changed from inline-flex via .btn */
+    margin: 0.5rem auto;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out, background var(--transition); /* Added background transition */
+    background: var(--danger);
+    color: #fff;
+}
+#btnFinish:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+    background: #ae0c0c; /* Added hover effect consistent with .btn.danger */
+}
+
+/* ============================== MODALS ============================== */
+.completion-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+.completion-modal .modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 90%;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.completion-modal .modal-content h2 {
+    margin: 0 0 1rem;
+}
+.completion-modal .modal-content button {
+    margin-top: 1rem;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background: var(--primary); /* Use variable */
+    color: white;
+    cursor: pointer;
+    transition: background var(--transition); /* Added transition */
+}
+.completion-modal .modal-content button:hover {
+    background: var(--primary-dark); /* Use variable */
+}
+
+/* ============================== ANIMATIONS ============================== */
+@keyframes fadeInOut{
+    0%{opacity:0;right:-100px;}
+    10%{opacity:1;right:1rem;}
+    90%{opacity:1;}
+    100%{opacity:0;right:-100px;}
+}
+
+@keyframes pulse { /* Added pulse animation definition */
+    0% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+}
+
+/* ============================== RESPONSIVE ============================== */
+/* Ajustes en móvil */
+@media (max-width: 768px) {
+    /* ==== General Mobile Improvements ==== */
+    /* Apilar navegación verticalmente y centrar */
+    nav ul{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        background:#4a90e2;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        gap:1.5rem;
+        padding:4rem 1rem 2rem;   /* algo de espacio debajo de la barra superior */
+        transform:translateX(100%);   /* deslizar desde la derecha */
+        transition:transform var(--transition);
+        z-index:9999;
+    }
+    nav ul.open{
+        transform:translateX(0);      /* deslizar hacia adentro */
+    }
+    /* Mostrar el botón de hamburguesa en pantallas pequeñas */
+    .nav-toggle{
+        display:block;
+        z-index: 10002;  /* por encima del menú */
+    }
+    .nav-toggle.open {      /* cuando el menú esté abierto */
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;    /* un poco mayor */
+    }
+    nav li {
+        width: 100%;
+        text-align: center;
+    }
+    nav a {
+        display: block;
+        padding: 0.75rem 0;
+        font-size: 1.75rem;   /* ↑ tamaño */
+        font-weight: 700;     /* más grueso */
+    }
+
+    /* Asegurar que el relleno de la tarjeta y el botón se reduzca */
+    .card {
+        padding: 1rem;
+    }
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 1rem;
+    }
+
+    /* El texto del héroe se escala en pantallas pequeñas */
+    .hero h2 {
+        font-size: 2rem;
+    }
+    .hero p {
+        font-size: 1rem;
+    }
+
+    /* Avatar ligeramente más pequeño */
+    .profile-avatar {
+        width: 96px;
+        height: 96px;
+    }
+
+    /* Forzar diseños de grid a una sola columna */
+    .grid-2,
+    .grid-3 {
+        grid-template-columns: 1fr;
+    }
+
+    /* Botones de acción de amigos apilados verticalmente */
+    .friend-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    /* Sección del temporizador organizada verticalmente */
+    .timer-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    /* ============================== gym.html specific mobile ============================== */
+    /* Deja todo en una columna */
+    #gym-screen .exercise-display {
+        flex-direction: column;
+    }
+    /* Sidebar pasa a fondo */
+    .sidebar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .controls {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    /* Reduce márgenes/tamaños */
+    .timer { /* Adjust timer size on mobile */
+        font-size: 1.5rem;
+    }
+    .rep-count {
+        font-size: 1rem;
+    }
+    /* ============================== ============================== ============================== */
+}
+/* ============================== Video and Canvas Side by Side ============================== */
+.feed-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+    margin-bottom: 1rem;
+}
+
+.feed-container video,
+.feed-container canvas {
+    width: 100%;
+    height: auto;
+}
