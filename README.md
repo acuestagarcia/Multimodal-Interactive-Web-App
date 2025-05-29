@@ -1,7 +1,7 @@
 
 # FitGame – Interactive Gym Assistant
 
-**FitGame** is a prototype web-based application designed to optimize users' gym time by synchronizing their mobile devices with gym screens. Developed as a final project for the *Prototyping Course* (Computer Science Degree, UC3M, 2024–2025), it leverages multiple input methods and real-time feedback to enhance the workout experience.
+**FitGame** is a prototype web-based application designed to optimize users' gym time by synchronizing their mobile devices with gym screens. Developed as a final project for the *Sistemas Interactivos e Ubicuos* course (Computer Science Degree, UC3M, 2024–2025), it leverages multiple input methods and real-time feedback to enhance the workout experience.
 
 ## Features
 
